@@ -1,3 +1,3 @@
 # EShopMicroservices 
 
-### Building an academic project using .NET Core with Microservices
+### Building an academic project using .NET Core with Microservices and Docker
