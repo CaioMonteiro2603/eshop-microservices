@@ -7,6 +7,11 @@ builder.Services.AddMediatR(config =>
     config.RegisterServicesFromAssembly(typeof(Program).Assembly); // command necessary to request the application 
 }); 
 
+builder.Services.AddMarten(opts =>
+{
+    opts.Connection(builder.Configuration.GetConnectionString("Database")!); 
+}).UseLightweightSessions();
+
 var app = builder.Build();  
 
 // after builder = configure the HTTP request pipeline 
