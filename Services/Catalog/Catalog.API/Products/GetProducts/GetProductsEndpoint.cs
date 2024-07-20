@@ -1,6 +1,4 @@
-﻿using Catalog.API.Products.CreateProduct;
-
-namespace Catalog.API.Products.GetProducts; 
+﻿namespace Catalog.API.Products.GetProducts; 
 
 public record GetProductsResponse(IEnumerable<Product> Products);
 public class GetProductsEndpoint : ICarterModule
@@ -17,7 +15,7 @@ public class GetProductsEndpoint : ICarterModule
 
         })
         .WithName("GetProduct")
-        .Produces<CreateProductResponse>(StatusCodes.Status200OK)
+        .Produces<GetProductsResponse>(StatusCodes.Status200OK)
         .ProducesProblem(StatusCodes.Status400BadRequest)
         .WithSummary("Get Products")
         .WithDescription("Get Products");
