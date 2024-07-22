@@ -1,20 +1,35 @@
 ﻿namespace Catalog.API.Products.CreateProduct;
 
-public record CreateProductCommand(string Name, List<string> Category, string Description, string ImagemFile, decimal Price) 
+public record CreateProductCommand(string Name, List<string> Category, string Description, string ImageFile, decimal Price) 
     : ICommand<CreateProductResult>; 
 public record CreateProductResult(Guid Id);
-internal class CreateProductCommandHandler(IDocumentSession session) : ICommandHandler<CreateProductCommand, CreateProductResult>
+
+public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand> 
+{
+    public CreateProductCommandValidator()
+    {
+        RuleFor(c => c.Name).NotEmpty().WithMessage("Name is required");
+        RuleFor(c => c.Category).NotEmpty().WithMessage("Category is required");
+        RuleFor(c => c.ImageFile).NotEmpty().WithMessage("ImageFile is required");
+        RuleFor(c => c.Price).GreaterThan(0).WithMessage("Price must be greater than 0");
+    }
+}
+
+internal class CreateProductCommandHandler(IDocumentSession session, ILogger<CreateProductCommandHandler> logger) 
+    : ICommandHandler<CreateProductCommand, CreateProductResult>
 {
     public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
     {
         // create Product entity from command object
+
+        logger.LogInformation("CreateProductCommandHandler.Handle called with {@Command}", command); //clean way to create a validation
 
         var product = new Product
         {
             Name = command.Name,
             Category = command.Category,
             Description = command.Description,
-            ImageFile = command.ImagemFile,
+            ImageFile = command.ImageFile,
             Price = command.Price,
         };
 
