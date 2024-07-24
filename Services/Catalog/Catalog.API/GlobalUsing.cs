@@ -10,3 +10,4 @@ global using BuildingBlocks.Behavior;
 global using BuildingBlocks.Exceptions.Handler;
 global using Catalog.API.Data;
 global using Marten.Pagination;
+global using HealthChecks.UI.Client;
