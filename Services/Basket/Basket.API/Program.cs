@@ -17,6 +17,12 @@ builder.Services.AddMarten(opts =>
 }).UseLightweightSessions();
 
 builder.Services.AddScoped<IBasketRepository, BasketRepository>(); 
+builder.Services.Decorate<IBasketRepository, CachedBasketRepository>(); // using the scrutor library
+
+builder.Services.AddStackExchangeRedisCache(opt =>
+{
+    opt.Configuration = builder.Configuration.GetConnectionString("Redis");
+}); 
 
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
