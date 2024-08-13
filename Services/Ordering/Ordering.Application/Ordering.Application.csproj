@@ -12,10 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="NewFolder3\" />
     <Folder Include="NewFolder4\" />
-    <Folder Include="Orders\EventHandlers\" />
-    <Folder Include="Orders\Queries\" />
   </ItemGroup>
 
   <ItemGroup>
