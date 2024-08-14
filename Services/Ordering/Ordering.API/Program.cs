@@ -8,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container 
 builder.Services.AddApplicationServices()
     .AddInfrastructureServices(builder.Configuration)
-    .AddApiServices(); 
+    .AddApiServices(builder.Configuration); // minimals APIs with Carter
 
 var app = builder.Build();
 
