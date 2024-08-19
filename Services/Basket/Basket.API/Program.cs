@@ -1,3 +1,4 @@
+using BuildingBlocks.Messaging.MassTransit;
 using Discount.Grpc;
 using HealthChecks.UI.Client;
 
@@ -53,6 +54,9 @@ builder.Services.AddHealthChecks()
     .AddRedis(builder.Configuration.GetConnectionString("Redis")!);
 
 var app = builder.Build();
+
+//Async Communication Services 
+builder.Services.AddMessageBroker(builder.Configuration);
 
 // Configure the http request pipeline 
 app.MapCarter(); 
